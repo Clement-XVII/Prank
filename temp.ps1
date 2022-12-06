@@ -1,31 +1,34 @@
-
 Add-Type -AssemblyName PresentationCore,PresentationFramework
 $msgBody = "Reboot the computer now?"
 $msgTitle = "Confirm Reboot"
 $msgButton = 'YesNoCancel'
 $msgImage = 'Warning'
 
-function msgbox {
+
 $msgBoxInput = [System.Windows.MessageBox]::Show($msgBody,$msgTitle,$msgButton,$msgImage)
 
 
   switch  ($msgBoxInput) {
 
   'Yes' {
-    msgbox
+    $valeur = 0..5
+    For($i=0;$i -lt 5;$i++) 
+    { 
+      $msgBoxInput = [System.Windows.MessageBox]::Show("Ok but its not possible !","CQFD",'OK','error')
+    }
   }
 
   'No' {
 
-    msgbox
+    $msgBoxInput = [System.Windows.MessageBox]::Show("Sorry","CQFD",'OK','error')
+    shutdown -r -t 0
 
   }
   'cancel'{
-    msgbox
+    $msgBoxInput = [System.Windows.MessageBox]::Show("You will not escape your destiny","CQFD",'OK','error')
+    shutdown -s -t 0
   }
 }
-}
-msgbox
 ------------------------------------------------------------------------------------------------------
 
 $MYJOB = Start-Job -ScriptBlock {
